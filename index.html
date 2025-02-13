@@ -20,41 +20,7 @@
             position: relative;
             margin-top: 20px;
         }
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: red;
-            border-radius: 50%;
-            animation: fall 3s linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-100vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .poem {
-            font-size: 18px;
-            color: #d63384;
-            margin: 20px;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 2s forwards 1s;
-        }
-        @keyframes fadeIn {
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .gallery img, .gallery video {
-            width: 300px;
-            margin: 10px;
-            border-radius: 10px;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: popIn 1.5s forwards 2s;
-        }
-        @keyframes popIn {
-            100% { opacity: 1; transform: scale(1); }
-        }
+        .hidden { display: none; }
         .button {
             background: #ff3366;
             color: white;
@@ -69,68 +35,71 @@
         .button:hover {
             background: #d63384;
         }
-        .hidden { display: none; }
     </style>
 </head>
 <body>
     <div id="page1">
         <h1>Happy Valentine's Day, My Love! ❤️</h1>
-        <button class="button" onclick="nextPage()">Click to Begin 💌</button>
+        <button class="button" onclick="nextPage(2)">Click to Begin 💌</button>
     </div>
     
     <div id="page2" class="hidden">
-        <h1>For You, Saksham 💖</h1>
-        <div class="poem">
-            <p>"I never knew love could feel this way, 💫<br>
-            Until you walked in and chose to stay. 💑<br>
-            Through miles apart or side by side, ✈️💞<br>
-            With you, my heart is open wide. ❤️"</p>
-            
-            <p>"Your love’s my strength, my guiding light, 🌟<br>
-            My sunshine bright, my stars at night. ☀️✨<br>
-            No matter what the future brings, ⏳💖<br>
-            With you, my heart forever sings. 🎶💌"</p>
-        </div>
-        <button class="button" onclick="nextPage()">Next ➡️</button>
+        <h1>Will you be my Valentine? 💕</h1>
+        <button class="button" onclick="nextPage(3)">Yes! 😍</button>
+        <button class="button" onclick="nextPage(2)">No 😢</button>
+    </div>
+
+    <div id="page3" class="hidden">
+        <h1>Do you love me? ❤️</h1>
+        <button class="button" onclick="nextPage(4)">Yes, of course! 💖</button>
+        <button class="button" onclick="nextPage(3)">Nope! 😂</button>
     </div>
     
-    <div id="page3" class="hidden">
+    <div id="page4" class="hidden">
+        <h1>How much do you love me? 😘</h1>
+        <button class="button" onclick="nextPage(5)">More than the stars! ✨</button>
+        <button class="button" onclick="nextPage(5)">Infinity & beyond! 🚀</button>
+    </div>
+
+    <div id="page5" class="hidden">
+        <h1>What do you love the most about me? 😍</h1>
+        <button class="button" onclick="nextPage(6)">Your smile! 😊</button>
+        <button class="button" onclick="nextPage(6)">Your kindness! 💖</button>
+        <button class="button" onclick="nextPage(6)">Everything! 🥰</button>
+    </div>
+
+    <div id="page6" class="hidden">
         <h1>Our Memories Together 📸</h1>
         <div class="gallery">
-            <img src="your_photo1.jpg" alt="Memory 1">
-            <img src="your_photo2.jpg" alt="Memory 2">
+            <img src=""C:\Users\asus\Pictures\Camera Roll\WhatsApp Image 2025-02-13 at 21.14.05_0327922a.jpg"" alt="Memory 1">
+            <img src=""C:\Users\asus\Pictures\Camera Roll\WhatsApp Image 2025-02-13 at 21.14.06_7dec2524.jpg"" alt="Memory 2">
             <video controls>
-                <source src="your_video1.mp4" type="video/mp4">
+                <source src=""C:\Users\asus\Pictures\Camera Roll\WhatsApp Video 2025-02-13 at 21.14.09_28a3ca30.mp4"" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
+        <button class="button" onclick="nextPage(7)">Next ➡️</button>
+    </div>
+    
+    <div id="page7" class="hidden">
+        <h1>Final Question: Will you always be mine? 💍</h1>
+        <button class="button" onclick="nextPage(8)">Forever & Always! 💕</button>
+    </div>
+    
+    <div id="page8" class="hidden">
+        <h1>Thank you for loving an idiot like me! 🥰</h1>
+        <h2>Love you, Saksham! 💖</h2>
         <button class="button" onclick="restart()">Restart 🔄</button>
     </div>
     
     <script>
-        let page = 1;
-        function nextPage() {
-            document.getElementById(`page${page}`).classList.add("hidden");
-            page++;
-            document.getElementById(`page${page}`).classList.remove("hidden");
+        function nextPage(pageNumber) {
+            document.querySelectorAll("div").forEach(div => div.classList.add("hidden"));
+            document.getElementById(`page${pageNumber}`).classList.remove("hidden");
         }
         function restart() {
-            page = 1;
-            document.getElementById("page3").classList.add("hidden");
-            document.getElementById("page1").classList.remove("hidden");
+            nextPage(1);
         }
-        function createConfetti() {
-            for (let i = 0; i < 50; i++) {
-                let confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = Math.random() * -100 + 'px';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-        setInterval(createConfetti, 1000);
     </script>
 </body>
 </html>

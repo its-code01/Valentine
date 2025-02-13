@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day, Saksham! 💖</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6f2;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            transition: background 1s ease-in-out;
+        }
+        h1 {
+            color: #ff3366;
+            margin-top: 50px;
+        }
+        .container {
+            position: relative;
+            margin-top: 20px;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .poem {
+            font-size: 18px;
+            color: #d63384;
+            margin: 20px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 2s forwards 1s;
+        }
+        @keyframes fadeIn {
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .gallery img, .gallery video {
+            width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popIn 1.5s forwards 2s;
+        }
+        @keyframes popIn {
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .button {
+            background: #ff3366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #d63384;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="page1">
+        <h1>Happy Valentine's Day, My Love! ❤️</h1>
+        <button class="button" onclick="nextPage()">Click to Begin 💌</button>
+    </div>
+    
+    <div id="page2" class="hidden">
+        <h1>For You, Saksham 💖</h1>
+        <div class="poem">
+            <p>"I never knew love could feel this way, 💫<br>
+            Until you walked in and chose to stay. 💑<br>
+            Through miles apart or side by side, ✈️💞<br>
+            With you, my heart is open wide. ❤️"</p>
+            
+            <p>"Your love’s my strength, my guiding light, 🌟<br>
+            My sunshine bright, my stars at night. ☀️✨<br>
+            No matter what the future brings, ⏳💖<br>
+            With you, my heart forever sings. 🎶💌"</p>
+        </div>
+        <button class="button" onclick="nextPage()">Next ➡️</button>
+    </div>
+    
+    <div id="page3" class="hidden">
+        <h1>Our Memories Together 📸</h1>
+        <div class="gallery">
+            <img src="your_photo1.jpg" alt="Memory 1">
+            <img src="your_photo2.jpg" alt="Memory 2">
+            <video controls>
+                <source src="your_video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <button class="button" onclick="restart()">Restart 🔄</button>
+    </div>
+    
+    <script>
+        let page = 1;
+        function nextPage() {
+            document.getElementById(`page${page}`).classList.add("hidden");
+            page++;
+            document.getElementById(`page${page}`).classList.remove("hidden");
+        }
+        function restart() {
+            page = 1;
+            document.getElementById("page3").classList.add("hidden");
+            document.getElementById("page1").classList.remove("hidden");
+        }
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = Math.random() * -100 + 'px';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+        setInterval(createConfetti, 1000);
+    </script>
+</body>
+</html>
